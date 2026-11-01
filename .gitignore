@@ -13,3 +13,4 @@ client_secret_*.json
 node_modules/
 .pytest_cache/
 extension/Chrome/release/
+extension/Chrome/WORK_IN_PROGRESS.md
