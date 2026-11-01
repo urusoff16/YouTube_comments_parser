@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Comment Tree Exporter для YouTube"
+  },
+  "extensionDescription": {
+    "message": "Выгрузка веток в JSON, JSONL, CSV и TXT, наглядная иерархия и ответы на комментарии прямо из расширения."
+  },
+  "actionTitle": {
+    "message": "Комментарии YouTube: экспорт и ответы"
+  }
+}

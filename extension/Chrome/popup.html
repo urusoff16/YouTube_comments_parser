@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YouTube Comments Exporter</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <header class="popup-header">
+        <div class="brand">
+          <img class="brand__mark" src="assets/icon-48.png" alt="">
+          <div>
+            <h1>Comments Exporter</h1>
+            <p data-i18n="popup.subtitle">Комментарии YouTube без API-ключа</p>
+          </div>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" type="button">
+          <span class="theme-toggle__icon" aria-hidden="true">☀</span>
+          <span class="theme-toggle__label">Светлая</span>
+        </button>
+      </header>
+
+      <form id="export-form">
+        <label class="field field--wide">
+          <span data-i18n="field.videoUrl">Ссылка на видео</span>
+          <input id="video-url" name="url" type="url" required placeholder="https://www.youtube.com/watch?v=…" autocomplete="url">
+        </label>
+
+        <div class="grid">
+          <label class="field">
+            <span data-i18n="field.sort">Сортировка</span>
+            <select id="sort" name="sort">
+              <option value="popular" data-i18n="sort.popular">Популярные</option>
+              <option value="recent" data-i18n="sort.recent">Сначала новые</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span data-i18n="field.format">Формат</span>
+            <select id="format" name="format">
+              <option value="json">JSON</option>
+              <option value="jsonl">JSONL</option>
+              <option value="csv">CSV</option>
+              <option value="txt" data-i18n="format.txt">Блокнот TXT</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span data-i18n="field.limit">Лимит</span>
+            <input id="limit" name="limit" type="number" min="1" step="1" placeholder="Все" data-i18n-placeholder="placeholder.all">
+          </label>
+
+          <label class="field">
+            <span data-i18n="field.delay">Пауза, мс</span>
+            <input id="delay" name="delay" type="number" min="100" max="60000" step="100" value="500">
+          </label>
+        </div>
+
+        <label class="field field--wide">
+          <span data-i18n="field.language">Язык интерфейса и данных</span>
+          <select id="language" name="language">
+            <option value="auto" data-i18n="language.auto">Авто</option>
+            <option value="ru" data-i18n="language.ru">Русский</option>
+            <option value="en" data-i18n="language.en">English</option>
+          </select>
+        </label>
+
+        <p id="error" class="error" role="alert" hidden></p>
+        <button class="primary" type="submit" data-i18n="action.start">Начать выгрузку</button>
+      </form>
+
+      <a class="library-shortcut" href="collector.html" target="_blank" data-i18n="library.title">Сохранённые видео</a>
+
+      <div class="popup-footer">
+        <p class="notice" data-i18n="popup.notice">Вкладка процесса должна оставаться открытой до завершения.</p>
+        <a href="privacy.html" target="_blank" data-i18n="link.privacy">Конфиденциальность</a>
+      </div>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

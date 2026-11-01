@@ -1,0 +1,11 @@
+{
+  "extensionName": {
+    "message": "Comment Tree Exporter for YouTube"
+  },
+  "extensionDescription": {
+    "message": "Export threads to JSON, JSONL, CSV and TXT, browse their hierarchy, and reply to comments directly from the extension."
+  },
+  "actionTitle": {
+    "message": "YouTube comments: export and reply"
+  }
+}

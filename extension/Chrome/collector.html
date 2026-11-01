@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YouTube Comments Exporter</title>
+    <link rel="stylesheet" href="collector.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="collector.html" aria-label="Comments Exporter">
+        <img class="brand__mark" src="assets/icon-32.png" alt="">
+        <span>Comments Exporter</span>
+      </a>
+      <div class="topbar__actions">
+        <button id="theme-toggle" class="theme-toggle" type="button">
+          <span class="theme-toggle__icon" aria-hidden="true">☀</span>
+          <span class="theme-toggle__label">Светлая</span>
+        </button>
+        <span id="state-badge" class="badge badge--waiting" data-i18n="collector.ready">Готов к запуску</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="setup-card">
+        <div class="setup-card__heading">
+          <div>
+            <p class="eyebrow" data-i18n="collector.newExport">Новая выгрузка</p>
+            <h1 data-i18n="collector.commentsTitle">Комментарии YouTube</h1>
+          </div>
+          <p data-i18n="collector.setupDescription">Все настройки, просмотр веток и экспорт находятся на одной странице.</p>
+        </div>
+
+        <form id="setup-form" class="setup-form">
+          <label class="field field--url">
+            <span data-i18n="field.videoUrl">Ссылка на видео</span>
+            <input id="video-url" name="url" type="url" required placeholder="https://www.youtube.com/watch?v=…" autocomplete="url">
+          </label>
+          <label class="field">
+            <span data-i18n="field.sort">Сортировка</span>
+            <select id="sort" name="sort">
+              <option value="popular" data-i18n="sort.popular">Популярные</option>
+              <option value="recent" data-i18n="sort.recent">Сначала новые</option>
+            </select>
+          </label>
+          <label class="field">
+            <span data-i18n="field.formatFile">Формат файла</span>
+            <select id="format" name="format">
+              <option value="json">JSON</option>
+              <option value="jsonl">JSONL</option>
+              <option value="csv">CSV</option>
+              <option value="txt" data-i18n="format.txt">Блокнот TXT</option>
+            </select>
+          </label>
+          <label class="field">
+            <span data-i18n="field.limit">Лимит</span>
+            <input id="limit" name="limit" type="number" min="1" step="1" placeholder="Все" data-i18n-placeholder="placeholder.all">
+          </label>
+          <label class="field">
+            <span data-i18n="field.delay">Пауза, мс</span>
+            <input id="delay" name="delay" type="number" min="100" max="60000" step="100" value="500">
+          </label>
+          <label class="field">
+            <span data-i18n="field.language">Язык интерфейса и данных</span>
+            <select id="language" name="language">
+              <option value="auto" data-i18n="language.auto">Авто</option>
+              <option value="ru" data-i18n="language.ru">Русский</option>
+              <option value="en" data-i18n="language.en">English</option>
+            </select>
+          </label>
+          <button id="start-button" class="button button--start" type="submit" data-i18n="action.start">Начать выгрузку</button>
+          <p id="form-error" class="form-error" role="alert" hidden></p>
+        </form>
+      </section>
+
+      <section class="library-card" aria-labelledby="library-title">
+        <div class="library-card__heading">
+          <div><p class="eyebrow" data-i18n="library.eyebrow">Локальная библиотека</p><h2 id="library-title" data-i18n="library.title">Сохранённые видео</h2></div>
+          <span id="saved-summary" class="library-summary"></span>
+        </div>
+        <div class="library-card__controls">
+          <label class="field"><span data-i18n="library.choose">Выберите сохранённое видео</span><select id="saved-videos"><option value="" data-i18n="library.choose">Выберите сохранённое видео</option></select></label>
+          <button id="reload-saved" class="button button--secondary" type="button" disabled data-i18n="library.reload">Открыть локальные данные</button>
+        </div>
+        <p class="library-note" data-i18n="library.retention">Повторный сбор дополняет сохранённый набор. Отсутствие записи в новой выборке не означает её удаление на YouTube.</p>
+        <div id="legacy-notice" class="legacy-notice" hidden>
+          <p data-i18n="library.legacy">Найдены данные прежней версии без ID видео. Вставьте соответствующую ссылку в поле выше и явно привяжите эти данные. Исходная копия сохранится.</p>
+          <button id="import-legacy" class="button button--secondary" type="button" data-i18n="library.import">Привязать прежние данные к ссылке</button>
+        </div>
+      </section>
+
+      <section class="account-card" aria-labelledby="account-title">
+        <div class="account-card__main">
+          <div>
+            <p class="eyebrow" data-i18n="account.eyebrow">Ответы от вашего имени</p>
+            <h2 id="account-title" data-i18n="account.title">Подключить YouTube</h2>
+            <p class="account-card__description" data-i18n="account.description">Войдите через Google, чтобы отвечать прямо из карточек после завершения выгрузки. Для сбора и экспорта вход не нужен.</p>
+          </div>
+          <div class="account-card__actions">
+            <button id="account-connect" class="button button--primary" type="button" data-i18n="account.connect">Войти через Google</button>
+            <button id="account-disconnect" class="button button--secondary" type="button" hidden data-i18n="account.disconnect">Отключить</button>
+          </div>
+        </div>
+        <a id="account-channel" class="account-channel" target="_blank" rel="noreferrer" hidden></a>
+        <p id="account-status" class="account-card__status" role="status" aria-live="polite"></p>
+        <p class="account-card__permissions" data-i18n="account.permissions">Google запрашивает разрешение на управление данными YouTube. Расширение использует его для определения вашего канала и отправки только написанных вами ответов.</p>
+        <details class="account-help">
+          <summary data-i18n="account.help">Проблемы со входом?</summary>
+          <p data-i18n="account.helpDescription">В Google Cloud должен быть клиент типа Chrome Extension, привязанный к этому ID расширения. Ваш аккаунт должен быть добавлен в тестовые пользователи.</p>
+          <code id="account-extension-id"></code>
+          <p><a href="https://myaccount.google.com/connections" target="_blank" rel="noreferrer" data-i18n="account.revoke">Управление доступом в Google</a></p>
+        </details>
+      </section>
+
+      <section class="run-card">
+        <div class="run-card__main">
+          <div>
+            <p class="eyebrow" data-i18n="collector.localExport">Локальная выгрузка</p>
+            <h2 id="run-title" data-i18n="collector.waitingUrl">Ожидаем ссылку на видео</h2>
+            <a id="video-link" class="video-link" target="_blank" rel="noreferrer"></a>
+          </div>
+          <div class="run-actions">
+            <button id="pause-button" class="button button--secondary" type="button" disabled data-i18n="action.pause">Пауза</button>
+            <button id="stop-button" class="button button--danger" type="button" disabled data-i18n="action.stop">Остановить</button>
+          </div>
+        </div>
+        <p id="status" class="status" aria-live="polite" data-i18n="collector.initialStatus">Вставьте ссылку, выберите настройки и нажмите «Начать выгрузку».</p>
+        <div class="progress progress--idle" aria-hidden="true"><span></span></div>
+        <p id="run-details" class="run-details"></p>
+      </section>
+
+      <section class="stats" aria-label="Статистика выгрузки" data-i18n-aria-label="stats.label">
+        <article><span data-i18n="stats.total">Всего записей</span><strong id="total-count">0</strong></article>
+        <article><span data-i18n="stats.comments">Комментарии</span><strong id="comment-count">0</strong></article>
+        <article><span data-i18n="stats.replies">Ответы</span><strong id="reply-count">0</strong></article>
+        <article><span data-i18n="stats.pages">Страницы</span><strong id="page-count">0</strong></article>
+        <article><span data-i18n="stats.time">Время</span><strong id="elapsed">00:00</strong></article>
+      </section>
+
+      <section class="export-card">
+        <div>
+          <h2 data-i18n="export.title">Скачать результат</h2>
+          <p data-i18n="export.description">Обычный набор данных или читаемое дерево для Блокнота.</p>
+        </div>
+        <div class="export-actions">
+          <button id="download-button" class="button button--primary" type="button" disabled>Скачать JSON</button>
+          <button id="txt-download-button" class="button button--notebook" type="button" disabled>
+            <span aria-hidden="true">≡</span> <span id="txt-download-label" data-i18n="export.notebook">Блокнот с иерархией (.txt)</span>
+          </button>
+          <button id="clear-data-button" class="button button--secondary" type="button" disabled data-i18n="export.clear">Удалить локальные данные</button>
+        </div>
+      </section>
+
+      <section class="comments-card">
+        <div class="comments-card__heading">
+          <div>
+            <p class="eyebrow" data-i18n="preview.eyebrow">Предпросмотр результата</p>
+            <h2 data-i18n="preview.title">Ветки комментариев</h2>
+          </div>
+          <p data-i18n="preview.hint">Цветные ветви показывают, кто кому ответил. Отвечать можно прямо из карточки комментария.</p>
+        </div>
+        <div id="comments-list" class="comments-list">
+          <div class="empty-state">
+            <span aria-hidden="true">💬</span>
+            <h3 data-i18n="preview.emptyTitle">Комментарии появятся здесь</h3>
+            <p data-i18n="preview.emptyDescription">Ответы будут автоматически вложены под теми комментариями, к которым они относятся.</p>
+          </div>
+        </div>
+        <div id="preview-controls" class="preview-controls" hidden>
+          <span id="preview-summary"></span>
+          <button id="load-more-button" class="button button--secondary" type="button" data-i18n="preview.showMore">Показать ещё</button>
+        </div>
+      </section>
+
+      <p class="footnote" data-i18n="collector.footnote">Не закрывайте страницу и служебную вкладку YouTube во время работы. При остановке или ошибке уже собранные записи можно скачать.</p>
+    </main>
+    <script type="module" src="collector.js"></script>
+  </body>
+</html>

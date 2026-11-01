@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Privacy — Comment Tree Exporter</title>
+    <link rel="stylesheet" href="info.css">
+  </head>
+  <body>
+    <header class="info-topbar">
+      <a class="info-brand" href="collector.html">
+        <img src="assets/icon-48.png" alt="">
+        <span>Comment Tree Exporter</span>
+      </a>
+      <label class="language-control">
+        <span data-i18n="field.language">Interface and data language</span>
+        <select id="language">
+          <option value="auto" data-i18n="language.auto">Auto</option>
+          <option value="ru" data-i18n="language.ru">Русский</option>
+          <option value="en" data-i18n="language.en">English</option>
+        </select>
+      </label>
+    </header>
+
+    <main class="info-page">
+      <article data-language-panel="en">
+        <p class="eyebrow">LOCAL-FIRST EXTENSION</p>
+        <h1>Privacy policy</h1>
+        <p class="updated">Effective date: October 16, 2026</p>
+
+        <section>
+          <h2>What the extension processes</h2>
+          <p>The extension processes a YouTube video URL, public comments, public author names and channel identifiers, reply relationships, dates, likes, avatars, and direct comment links. It uses the active YouTube browser session for the requested export and sends reply text only after the user explicitly clicks Send.</p>
+        </section>
+        <section>
+          <h2>Where the data goes</h2>
+          <p>Comments and saved posted replies are stored locally in IndexedDB. Preferences and a sign-in-enabled flag are stored in Chrome local storage. There is no developer-operated server, analytics, advertising, or developer account system. Export requests go to <code>www.youtube.com</code>; optional Google sign-in is handled by Chrome Identity, and channel identity and explicitly submitted replies use HTTPS requests to <code>www.googleapis.com</code>. Avatars may load from image URLs supplied by YouTube.</p>
+          <p>The OAuth scope <code>youtube.force-ssl</code> grants broader YouTube management access than replying alone. The extension uses it only to identify your authorized channel and publish replies you explicitly submit. Tokens are managed by Chrome Identity and are not written to the database, exports, preferences, or logs. Disconnect clears cached authorization locally. You can separately <a href="https://myaccount.google.com/connections" target="_blank" rel="noreferrer">revoke access in Google</a>. No AI or MCP service receives data in this version.</p>
+        </section>
+        <section>
+          <h2>Retention and deletion</h2>
+          <p>IndexedDB also stores per-video metadata, unsent drafts keyed by video/comment/channel, sending states and sent history. Drafts stay local until Send is clicked. New collection merges records by ID and preserves other datasets. “Delete this video” removes the selected video's comments, drafts and history after confirmation. Older data without a video ID is kept as a backup; linking it to a video requires explicit confirmation and retains the original. Settings record this link. Removing the extension clears local extension storage. Downloaded files are not removed automatically.</p>
+        </section>
+        <section>
+          <h2>Permissions</h2>
+          <p><code>activeTab</code> detects the current video after a user click; <code>downloads</code> saves exports; <code>scripting</code> reconnects the request bridge after an update; <code>storage</code> keeps preferences and the sign-in-enabled flag; <code>identity</code> obtains Google OAuth tokens through Chrome. Access to <code>https://www.youtube.com/*</code> loads comments; access to <code>https://www.googleapis.com/*</code> identifies your channel and publishes replies you explicitly submit. No permission is used for advertising or profiling.</p>
+        </section>
+        <section>
+          <h2>Important notice</h2>
+          <p>This is an independent, unofficial utility. It is not produced, endorsed, or supported by YouTube or Google. YouTube may change or restrict access to its internal interfaces at any time. Users are responsible for complying with applicable terms and laws.</p>
+        </section>
+      </article>
+
+      <article data-language-panel="ru" hidden>
+        <p class="eyebrow">ЛОКАЛЬНАЯ ОБРАБОТКА</p>
+        <h1>Политика конфиденциальности</h1>
+        <p class="updated">Дата вступления в силу: 16 октября 2026 года</p>
+
+        <section>
+          <h2>Что обрабатывает расширение</h2>
+          <p>Расширение обрабатывает ссылку на видео YouTube, публичные комментарии, публичные имена авторов и идентификаторы каналов, связи ответов, даты, лайки, аватары и прямые ссылки на комментарии. Текущая браузерная сессия YouTube используется для запрошенной выгрузки, а текст ответа отправляется только после явного нажатия пользователем кнопки отправки.</p>
+        </section>
+        <section>
+          <h2>Куда передаются данные</h2>
+          <p>Комментарии и сохранённые опубликованные ответы находятся локально в IndexedDB. Настройки и признак включённого входа находятся в локальном хранилище Chrome. У расширения нет сервера разработчика, аналитики, рекламы или собственной системы аккаунтов. Выгрузка обращается к <code>www.youtube.com</code>; необязательный вход через Google обрабатывает Chrome Identity, а данные канала и явно отправленные ответы используют HTTPS-запросы к <code>www.googleapis.com</code>. Аватары могут загружаться по адресам изображений, предоставленным YouTube.</p>
+          <p>Разрешение <code>youtube.force-ssl</code> даёт более широкий доступ к управлению YouTube, чем только ответы. Расширение использует его лишь для определения вашего канала и публикации явно отправленных ответов. Токенами управляет Chrome Identity; они не записываются в базу, экспорт, настройки или логи. «Отключить» очищает локально кешированную авторизацию. Отдельно <a href="https://myaccount.google.com/connections" target="_blank" rel="noreferrer">отозвать разрешение можно в Google</a>. В этой версии данные не передаются ИИ или MCP-сервисам.</p>
+        </section>
+        <section>
+          <h2>Хранение и удаление</h2>
+          <p>В IndexedDB также хранятся сведения о видео, черновики по видео/комментарию/каналу, состояния отправки и история ответов. Черновик остаётся локальным до нажатия «Отправить». Новый сбор объединяет ID и сохраняет другие наборы. «Удалить это видео» после подтверждения очищает комментарии, черновики и историю выбранного видео. Прежние данные без ID видео остаются резервной копией; привязка требует явного подтверждения и сохраняет оригинал. Настройки хранят факт привязки. Удаление расширения очищает локальное хранилище; скачанные файлы автоматически не удаляются.</p>
+        </section>
+        <section>
+          <h2>Разрешения</h2>
+          <p><code>activeTab</code> определяет текущее видео; <code>downloads</code> сохраняет файлы; <code>scripting</code> переподключает посредник запросов после обновления; <code>storage</code> хранит настройки и признак включённого входа; <code>identity</code> получает OAuth-токены Google через Chrome. Доступ к <code>https://www.youtube.com/*</code> загружает комментарии; доступ к <code>https://www.googleapis.com/*</code> определяет ваш канал и публикует явно отправленные ответы. Разрешения не используются для рекламы или профилирования.</p>
+        </section>
+        <section>
+          <h2>Важное уведомление</h2>
+          <p>Это независимый неофициальный инструмент. Он не создан, не одобрен и не поддерживается YouTube или Google. YouTube может изменить или ограничить внутренние интерфейсы в любое время. Пользователь самостоятельно отвечает за соблюдение применимых условий и законов.</p>
+        </section>
+      </article>
+
+      <a class="back-link" href="collector.html" data-i18n="privacy.back">Back to the extension</a>
+    </main>
+    <script type="module" src="info.js"></script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comment tree visual fixture</title>
+    <link rel="stylesheet" href="../collector.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <span class="brand"><img class="brand__mark" src="../assets/icon-32.png" alt="">Comments Exporter</span>
+      <span class="badge badge--done">Готово</span>
+    </header>
+    <main class="layout">
+      <section class="comments-card">
+        <div class="comments-card__heading">
+          <div><p class="eyebrow">Предпросмотр результата</p><h2>Ветки комментариев</h2></div>
+          <p>Цветные ветви показывают, кто кому ответил.</p>
+        </div>
+        <div class="comments-list">
+          <article class="thread">
+            <div class="comment">
+              <span class="avatar">А</span>
+              <div class="comment__body">
+                <div class="comment__header"><span class="comment__author">@alex</span><a class="youtube-link"><span>▶</span></a><span class="comment__date">2 дня назад</span></div>
+                <p class="comment__text">Очень полезный разбор. А как это работает с длинными ветками?</p>
+                <div class="comment__meta"><span>♥ 24</span><span>Ответов: 3</span><button class="comment__reply-button">Ответить</button></div>
+              </div>
+            </div>
+            <div class="replies">
+              <p class="replies__label">Ответы в ветке: 3</p>
+              <div class="comment comment--reply comment--depth-1" style="--reply-depth: 1">
+                <span class="avatar">М</span>
+                <div class="comment__body"><div class="comment__header"><span class="comment__author">@maria</span><span class="comment__target">ответил @alex</span><span class="comment__date">вчера</span></div><p class="comment__text">Основные ответы остаются на первом уровне.</p><div class="comment__meta"><span>♥ 7</span><button class="comment__reply-button">Ответить</button></div></div>
+              </div>
+              <div class="comment comment--reply comment--depth-2" style="--reply-depth: 2">
+                <span class="avatar">И</span>
+                <div class="comment__body"><div class="comment__header"><span class="comment__author">@ivan</span><span class="comment__target">ответил @maria</span><span class="comment__date">5 часов назад</span></div><p class="comment__text">Теперь видно, что этот ответ относится именно к Марии.</p><div class="comment__meta"><span>♥ 3</span><button class="comment__reply-button">Ответить</button></div></div>
+              </div>
+              <div class="comment comment--reply comment--depth-3" style="--reply-depth: 3">
+                <span class="avatar">В</span>
+                <div class="comment__body"><div class="comment__header"><span class="comment__author">Вы</span><span class="comment__target">ответил @ivan</span><span class="comment__date">только что</span></div><p class="comment__text">Да, и каждый следующий уровень получает свой цвет.</p><div class="comment__meta"><span>♥ 0</span><span class="comment__posted-badge">опубликовано</span></div></div>
+              </div>
+              <div class="comment comment--reply comment--depth-2" style="--reply-depth: 2">
+                <span class="avatar">В</span>
+                <div class="comment__body">
+                  <div class="comment__header"><span class="comment__author">Вы</span><span class="comment__target">ответ для @maria</span></div>
+                  <form class="reply-composer">
+                    <div class="reply-composer__heading"><strong>Ответ для @maria</strong><span>38 / 10000</span></div>
+                    <textarea class="reply-composer__input">@maria Спасибо, теперь всё понятно!</textarea>
+                    <p class="reply-composer__notice">Ответ будет опубликован только после нажатия «Отправить».</p>
+                    <p class="reply-composer__status"></p>
+                    <div class="reply-composer__actions"><button class="button button--secondary">Отмена</button><button class="button button--primary">Отправить</button></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

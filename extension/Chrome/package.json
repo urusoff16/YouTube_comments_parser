@@ -1,0 +1,12 @@
+{
+  "name": "youtube-comments-exporter-chrome",
+  "version": "1.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "test:browser": "node scripts/browser-smoke.mjs",
+    "check": "node --check popup.js && node --check collector.js && node --check content-proxy.js && node --check info.js && node --check src/youtube.js && node --check src/youtube-account.js && node --check src/request-proxy.js && node --check src/database.js && node --check src/export.js && node --check src/errors.js && node --check src/i18n.js && node --check src/theme.js",
+    "build:release": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build-release.ps1"
+  }
+}

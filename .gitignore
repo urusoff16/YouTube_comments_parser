@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+*_comments.json
+.*.tmp
+API_GOOGL.md
+client_secret_*.json
+*.pem
+*.p12
+*.pfx
+.env
+.env.*
+node_modules/
+.pytest_cache/
+extension/Chrome/release/
