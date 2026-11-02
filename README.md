@@ -1,8 +1,14 @@
 # YouTube Comments Parser
 
+Download YouTube comments and replies from a youtube.com video into TXT, JSON, JSONL or CSV for reading and analysis. / Скачать комментарии и ответы с видео YouTube (youtube.com) в TXT, JSON, JSONL или CSV для чтения и анализа.
+
 ## English
 
 An independent Chrome extension and Python command-line tool for collecting available YouTube comments and replies. The extension displays threaded conversations, exports JSON, JSONL, CSV and readable TXT, keeps per-video local collections and drafts, and can post user-written replies through Google OAuth and the YouTube Data API. The Python tool exports public comments to JSON. Firefox and Opera folders are reserved for future versions.
+
+### Download and analyze YouTube comments
+
+Use the Chrome extension to save available video comments and replies as a readable text file with conversation threads, or export structured JSON, JSONL and CSV for further analysis. Open a comment on YouTube or write and post a reply after configuring Google sign-in. The interface is available in English and Russian, with automatic or manual language selection.
 
 To install the Chrome extension, open `chrome://extensions`, enable Developer mode, select **Load unpacked**, and choose `extension/Chrome`. Google sign-in requires a properly configured OAuth client bound to the extension ID; the existing client is configured for the owner's installation. See the [Chrome instructions](extension/Chrome/README.md) and [privacy policy](extension/Chrome/PRIVACY.md).
 
@@ -11,6 +17,10 @@ Comment collection uses an unofficial YouTube interface, which may change or res
 ## Русский
 
 Независимое расширение Chrome и консольный инструмент Python для сбора доступных комментариев и ответов YouTube. Расширение показывает ветки, выгружает JSON, JSONL, CSV и TXT, сохраняет наборы по видео и черновики, а также позволяет отправлять написанные пользователем ответы через Google OAuth и YouTube Data API.
+
+### Как скачать комментарии с YouTube для анализа
+
+С помощью расширения Chrome можно сохранить доступные комментарии и ответы к видео с youtube.com в текстовый файл TXT с иерархией обсуждений либо выгрузить данные в JSON, JSONL или CSV для дальнейшего анализа. Комментарий можно открыть на YouTube, а после настройки входа Google — написать и отправить ответ. Интерфейс доступен на русском и английском языках с автоматическим или ручным выбором.
 
 Расширение устанавливается через `chrome://extensions`: включите режим разработчика, выберите «Загрузить распакованное расширение» и укажите папку `extension/Chrome`. Для входа нужен OAuth-клиент, привязанный к ID расширения; текущий клиент настроен для установки владельца. Подробности: [инструкция Chrome](extension/Chrome/README.md) и [политика конфиденциальности](extension/Chrome/PRIVACY.md).
 
